@@ -7,7 +7,6 @@ export function Header() {
   return (
     <HeaderContainer>
       <img src={logo} alt="Coffee cup" />
-
       <nav>
         <LocationContainer>
           <MapPin size={22} weight="fill" />

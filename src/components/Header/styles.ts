@@ -5,8 +5,8 @@ width: 100%;
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 32px;
-margin: 0 auto;
+padding: 32px 0;
+
 
   img { 
     height: 40px;
