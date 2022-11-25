@@ -1,7 +1,7 @@
 export const defaultTheme = {
- cardBackground: '#F3F2F2',
- background: '#FAFAFA',
-
+  cardBackground: '#F3F2F2',
+  background: '#FAFAFA',
+  baseButton: '#E6E5E5',
 
   // 'gray-100': '#E1E1E6',
   'gray-300': '#8D8686',

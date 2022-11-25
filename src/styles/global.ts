@@ -12,7 +12,7 @@ body {
   color: ${(props) => props.theme['gray-500']};
 
   -webkit-font-smoothing: antialiased;
-
+  padding-bottom: 10rem;
 }
 
 body, input, text-area, button {

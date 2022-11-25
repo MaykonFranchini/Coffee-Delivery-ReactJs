@@ -17,8 +17,8 @@ export function Banner() {
 
         <BenefitsList>
           <span><img src={cartImg} alt="" />Compra simples e segura</span>
-          <span><img src={timerImg} alt="" />Entrega rápida e rastreada</span>
           <span><img src={packageImg} alt="" />Embalagem mantém o café intacto</span>
+          <span><img src={timerImg} alt="" />Entrega rápida e rastreada</span>
           <span><img src={coffeeIconImg} alt="" />O café chega fresquinho até você</span>
         </BenefitsList>
 
