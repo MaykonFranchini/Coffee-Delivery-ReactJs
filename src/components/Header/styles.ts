@@ -37,11 +37,22 @@ export const LocationContainer = styled.div`
 
 `
 export const ShoppingCartButton = styled.a`
-
+  position: relative;
   padding: 6px;
   border-radius: 6px;
 
   background: ${(props) => props.theme['yellow-300']};
   color: ${(props) => props.theme['yellow-900']};
 
+`
+
+export const CartBadge = styled.span`
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  padding: 2px 6px;
+  background: ${(props) => props.theme['yellow-900']};
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
 `

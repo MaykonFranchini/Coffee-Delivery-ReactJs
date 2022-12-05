@@ -8,7 +8,7 @@ export function CoffeeList() {
       <h2>Nossos cafés</h2>
       <CoffeeGrid>
         {coffees.map((coffee) => (
-          <CoffeeCard details={coffee}/>
+          <CoffeeCard key={coffee.id} details={coffee}/>
         ))}
       </CoffeeGrid>
     </CoffeeListContainer>

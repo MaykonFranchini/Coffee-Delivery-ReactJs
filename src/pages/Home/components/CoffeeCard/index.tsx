@@ -1,10 +1,13 @@
 import { AddToCartButton, Amount, CardActions, CofeeDescription, CoffeeBadge, CoffeeCardContainer, Price, PriceInfo, TagsContainer } from "./styles";
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { useContext, useState } from "react";
+import { CartContext } from "../../../../contexts/CartContext";
 
 
 
 interface CoffeProps {
  details : {
+  id: number;
   name: string;
   tags: string[],
   description: string,
@@ -14,15 +17,37 @@ interface CoffeProps {
 }
 
 export function CoffeeCard( {details} : CoffeProps) {
+  const [amount, setAmount] = useState(0)
+
+  const { cart, addItemToCart} = useContext(CartContext)
+
+  function incrementAmount() {
+    setAmount(state => state + 1)
+  }
+  function decrementAmount() {
+    if(amount == 0) {
+      return
+    }
+
+    setAmount(state => state - 1)
+  }
+
+  function handleAddItemToCart() {
+    const item = {id: details.id, amount}
+    addItemToCart(item)
+    
+  }
+
   return (
+    
     <CoffeeCardContainer>
       <img src={details.img_url} alt="expresso coffee" />
       
-      <TagsContainer>
+      {/* <TagsContainer>
       {details.tags.map((tag) => (
-        <CoffeeBadge key={new Date().getSeconds()}>{tag}</CoffeeBadge>
+        <CoffeeBadge>{tag}</CoffeeBadge>
       ))}
-      </TagsContainer>
+      </TagsContainer> */}
      
       <CofeeDescription>
         <strong>{details.name}</strong>
@@ -33,11 +58,11 @@ export function CoffeeCard( {details} : CoffeProps) {
         <Price>R$ <strong>{details.price / 100}</strong></Price>
         <CardActions>
           <Amount>
-            <button><Minus size={16} weight="fill" /></button>
-            <span>1</span>
-            <button><Plus size={16} weight="fill" /></button>
+            <button onClick={decrementAmount}><Minus size={16} weight="fill" /></button>
+            <span>{amount}</span>
+            <button onClick={incrementAmount}><Plus size={16} weight="fill" /></button>
           </Amount>
-          <AddToCartButton><ShoppingCart size={22} weight="fill" /></AddToCartButton>
+          <AddToCartButton onClick={handleAddItemToCart}><ShoppingCart size={22} weight="fill" /></AddToCartButton>
         </CardActions>
       </PriceInfo>
     </CoffeeCardContainer>
