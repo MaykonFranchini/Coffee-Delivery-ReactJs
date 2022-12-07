@@ -19,7 +19,7 @@ interface CoffeProps {
 export function CoffeeCard( {details} : CoffeProps) {
   const [amount, setAmount] = useState(0)
 
-  const { cart, addItemToCart} = useContext(CartContext)
+  const { addItemToCart } = useContext(CartContext)
 
   function incrementAmount() {
     setAmount(state => state + 1)
@@ -42,12 +42,6 @@ export function CoffeeCard( {details} : CoffeProps) {
     
     <CoffeeCardContainer>
       <img src={details.img_url} alt="expresso coffee" />
-      
-      {/* <TagsContainer>
-      {details.tags.map((tag) => (
-        <CoffeeBadge>{tag}</CoffeeBadge>
-      ))}
-      </TagsContainer> */}
      
       <CofeeDescription>
         <strong>{details.name}</strong>
