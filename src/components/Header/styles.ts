@@ -36,7 +36,7 @@ export const LocationContainer = styled.div`
   color: ${(props) => props.theme['purple-900']};
 
 `
-export const ShoppingCartButton = styled.a`
+export const ShoppingCartButton = styled.span`
   position: relative;
   padding: 6px;
   border-radius: 6px;
@@ -44,6 +44,9 @@ export const ShoppingCartButton = styled.a`
   background: ${(props) => props.theme['yellow-300']};
   color: ${(props) => props.theme['yellow-900']};
 
+  a {
+    color: ${(props) => props.theme['yellow-900']};
+  }
 `
 
 export const CartBadge = styled.span`
