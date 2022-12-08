@@ -46,3 +46,25 @@ export const CheckoutButton = styled.button`
     background: ${(props) =>  props.theme['yellow-900']};
   }
 `
+
+export const EmptyCartMessage = styled.div` 
+  font-family: 'Baloo 2', cursive;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme['purple-900']};
+    cursor: pointer;
+    padding: 4px;
+    background: ${(props) => props.theme.baseButton};
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 8px;
+
+    &:hover {
+      background: ${(props) =>  props.theme.baseHover};
+    }
+  }
+`

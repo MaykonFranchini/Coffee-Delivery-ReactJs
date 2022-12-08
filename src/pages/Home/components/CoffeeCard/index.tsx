@@ -49,7 +49,7 @@ export function CoffeeCard( {details} : CoffeProps) {
       </CofeeDescription>
 
       <PriceInfo>
-        <Price>R$ <strong>{details.price / 100}</strong></Price>
+        <Price>R$ <strong>{(details.price / 100).toFixed(2)}</strong></Price>
         <CardActions>
           <Amount>
             <button onClick={decrementAmount}><Minus size={16} weight="fill" /></button>
