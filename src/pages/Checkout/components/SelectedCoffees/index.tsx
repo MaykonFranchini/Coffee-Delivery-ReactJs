@@ -14,7 +14,7 @@ export function SelectedCoffees() {
     return (
       <FormContainer>
         {cart.map(coffee => (
-          <SelectedCoffeeCard  id={coffee.id} amount={coffee.amount}/>
+          <SelectedCoffeeCard key={coffee.id} id={coffee.id} amount={coffee.amount}/>
         ))}
         
         <PriceDetails>

@@ -1,9 +1,49 @@
 import { MapPinLine } from "phosphor-react";
 import { FormContainer } from "../../styles";
+import { Input } from "../Input";
 import { FormHeading } from "../PaymentMethods/styles";
-import { InputField } from "./styles";
+
 
 export function AddressContainer() {
+  
+const inputsData = [
+  {
+    placeholder: 'CEP',
+    inputId: 'cep'
+  },
+  {
+    placeholder: 'Rua',
+    size: '500px',
+    inputId: 'rua'
+  },
+  {
+    placeholder: 'Numero',
+    size: '192px',
+    inputId: 'numero'
+  },
+  {
+    placeholder: 'Complemento',
+    size: '292px',
+    inputId: 'complemento'
+  },
+  {
+    placeholder: 'Bairro',
+    size: '192px' ,
+    inputId: 'bairro'
+  },
+  {
+    placeholder: 'Cidade',
+    size: '226px',
+    inputId: 'cidade'
+  },
+  {
+    placeholder: 'UF',
+    size: '50px',
+    inputId: 'uf'
+  },
+
+]
+  
   return (
     <FormContainer>
       <FormHeading>
@@ -14,13 +54,14 @@ export function AddressContainer() {
         </div>
       </FormHeading>
 
-      <InputField placeholder='CEP'/>
-      <InputField placeholder='Rua' size='500px'/>
-      <InputField placeholder='Numero' size='192px'/>
-      <InputField placeholder='Complemento' size='292px'/>
-      <InputField placeholder='Bairro' size='192px'/>
-      <InputField placeholder='Cidade' size='226px'/>
-      <InputField placeholder='UF' size='50px'/>
+      {inputsData.map( input => {
+        return (
+          <Input key={input.inputId} placeholder={input.placeholder} inputId={input.inputId} size={input.size} />
+        )
+      })}
+
+      
+
     </FormContainer>
   )
 }

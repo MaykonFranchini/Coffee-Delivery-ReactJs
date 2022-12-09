@@ -1,9 +1,11 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from "phosphor-react"
+import { useFormContext } from "react-hook-form"
 import { FormContainer } from "../../styles"
+import { ErrorMessage } from '../Input/styles'
 import { FormHeading, Label, PaymentMethodBox } from "./styles"
 
 export function PaymentMethodContainer() {
-  
+  const {register, formState: { errors}} = useFormContext()
   const paymentOptions = [
     { 
       id: "cartao-credito",
@@ -33,14 +35,15 @@ export function PaymentMethodContainer() {
       </FormHeading>
       
       {paymentOptions.map(payment => ( 
-        <PaymentMethodBox>
-          <input type="radio" id={payment.id} name="payment-method" value={payment.id} />
+        <PaymentMethodBox key={payment.id}>
+          <input type="radio" id={payment.id} value={payment.id} {...register('paymentMethod')} />
           <Label htmlFor={payment.id}>
             {payment.icon}
             {payment.label}
           </Label>
         </PaymentMethodBox>
       ))}
+      {errors.paymentMethod && <ErrorMessage>* Selecione um metodo de pagamento</ErrorMessage>}
     </FormContainer>
   )
 }
