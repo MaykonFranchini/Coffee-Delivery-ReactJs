@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
+import { NonUndefined } from "react-hook-form";
 import { coffees } from "../coffees";
 
 interface Item {
@@ -10,21 +11,52 @@ interface CartContextType {
   cart: Item[];
   addItemToCart: ({id, amount}: Item) => void;
   totalItems: number;
+  totalPrice: number;
+  orderInfo: OrderInfoData;
+  handleCreateOrder: (deliveryDetails: DeliveryDetails) => void;
   decreeseAmount: (id: number) => void;
   increeseAmount: (id: number) => void;
   removeItem: (id: number) => void;
-  totalPrice: number;
 }
 
 interface CartContextProviderType {
   children:  ReactNode;
 }
 
+interface DeliveryDetails {
+  address: {
+    cep: string;
+    rua: string;
+    numero: string;
+    complemento?: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+  }
+  paymentMethod: string;
+}
+
+interface OrderInfoData {
+  items: Item[];
+  deliveryDetails: DeliveryDetails
+}
+
+
+
 
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({children }: CartContextProviderType) {
   const [cart, setCart] = useState<Item[]>([])
+  const [orderInfo, setOrderInfo] = useState<OrderInfoData>({} as OrderInfoData)
+
+  function handleCreateOrder(deliveryDetails: DeliveryDetails) {
+    setOrderInfo({
+      items: cart, 
+      deliveryDetails
+    })
+    setCart([])
+  }
 
   function addItemToCart(item : Item) {
     
@@ -93,7 +125,7 @@ export function CartContextProvider({children }: CartContextProviderType) {
   }
 
   return (
-    <CartContext.Provider value={{cart, totalPrice, addItemToCart, totalItems, increeseAmount, decreeseAmount, removeItem}}>
+    <CartContext.Provider value={{orderInfo, handleCreateOrder, cart, totalPrice, addItemToCart, totalItems, increeseAmount, decreeseAmount, removeItem}}>
       {children}
     </CartContext.Provider>
   )

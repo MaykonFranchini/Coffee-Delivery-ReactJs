@@ -1,10 +1,13 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { AddressContainer } from "./components/AddressContainer";
 import { PaymentMethodContainer } from "./components/PaymentMethods";
 import { SelectedCoffees } from "./components/SelectedCoffees";
 import { PageContainer } from "./styles";
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
+import { redirect, useNavigate } from "react-router-dom";
 
 const newOrderValidationSchema = zod.object({
   cep: zod.string().min(9, 'Informe seu cep corretamente no formato 27943-100'),
@@ -16,16 +19,42 @@ const newOrderValidationSchema = zod.object({
   paymentMethod: zod.string().min(1, 'Selecione o metodo de pagamento'),
 })
 
-export function Checkout() {
+interface FormDetails extends SubmitHandler<FieldValues>{
+  cep: string;
+  rua: string;
+  numero: string;
+  complemento?: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  paymentMethod: string;
+}
 
-  const deliveryDetails = useForm({
-    resolver: zodResolver(newOrderValidationSchema),
+export function Checkout() {
+  const {handleCreateOrder} = useContext(CartContext)
+  const navigate = useNavigate()
+
+  const deliveryDetails = useForm<FormDetails>({
+    resolver: zodResolver(newOrderValidationSchema)
   })
 
   const { handleSubmit } = deliveryDetails
 
-  function handlePlaceOrder(data: any) {
-    console.log(data)
+  function handlePlaceOrder({cep, rua, bairro, numero, complemento, cidade, uf, paymentMethod}: FormDetails) {
+    handleCreateOrder({
+      address: {
+        cep, 
+        rua,
+        numero, 
+        complemento,
+        bairro,
+        cidade,
+        uf,
+      },
+       paymentMethod
+    })
+    
+    navigate('/confirmation')
   } 
 
   return (
