@@ -7,11 +7,11 @@
 ## Tools used:
 
 - ReactJS
-- Context API (For create Cart logic with a context to avoid prop drilling)
+- Context API (for create Cart logic with a context to avoid prop drilling)
 
 ## External libraries
 - React router (for routing)
-- toastify (for notifications)
+- Toastify (for notifications)
 - Styled Components (for css styles)
 - Phosphor icons
 - Zod (for forms validations)
