@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { NonUndefined } from "react-hook-form";
+import { toast } from "react-toastify";
 import { coffees } from "../coffees";
 
 interface Item {
@@ -85,7 +86,9 @@ export function CartContextProvider({children }: CartContextProviderType) {
         })
       }
     })
-       
+      toast.success('Item added to cart', {
+        icon: "☕"
+      })
   }
 
   const totalItems = cart.reduce((acc,item) => {
