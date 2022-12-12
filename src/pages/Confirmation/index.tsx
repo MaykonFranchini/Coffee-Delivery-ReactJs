@@ -22,6 +22,8 @@ export function Confirmation() {
         </ConfirmationContainer>
       </>
     )
+  } else {
+    return <div></div>
   }
   
 }

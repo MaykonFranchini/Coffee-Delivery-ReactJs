@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { NonUndefined } from "react-hook-form";
 import { coffees } from "../coffees";
 
@@ -47,8 +47,20 @@ interface OrderInfoData {
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({children }: CartContextProviderType) {
-  const [cart, setCart] = useState<Item[]>([])
+  const storedItems = localStorage.getItem('@coffee-delivery: cart-1.0.0')
+  let initialValue = []
+  if(storedItems) {
+    initialValue = JSON.parse(storedItems)
+  }
+  const [cart, setCart] = useState<Item[]>(initialValue)
   const [orderInfo, setOrderInfo] = useState<OrderInfoData>({} as OrderInfoData)
+
+  useEffect(()=> {
+    const stateJSON = JSON.stringify(cart)
+    localStorage.setItem('@coffee-delivery: cart-1.0.0', stateJSON)
+  },[cart])
+
+
 
   function handleCreateOrder(deliveryDetails: DeliveryDetails) {
     setOrderInfo({
